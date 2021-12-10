@@ -1,17 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    ResponsiveContainer,
+    LabelList
+} from 'recharts';
 
 const App = () => {
-    const [numbers, setNumbers] = useState([]);
-    const [results, setResults] = useState([]);
-
-    useEffect(() => {
-        fetchData();
-        countNumbers(numbers);
-    }, [setNumbers]);
+    const [results, setResults] = useState([
+        {
+            name: '0'
+        },
+        {
+            name: '1'
+        },
+        {
+            name: '2'
+        },
+        {
+            name: '3'
+        },
+        {
+            name: '4'
+        },
+        {
+            name: '5'
+        },
+        {
+            name: '6'
+        },
+        {
+            name: '7'
+        },
+        {
+            name: '8'
+        },
+        {
+            name: '9'
+        }
+    ]);
 
     const fetchData = async () => {
+        console.log('fetch is firing');
         const data = await axios.get(
             'https://www.random.org/integers/?num=200&min=1&max=10&col=1&base=10&format=plain&rnd=new'
         );
@@ -19,12 +53,11 @@ const App = () => {
         const stringData = data.data.toString();
         const cleanData = stringData.replace(/(\r\n|\n|\r)/gm, '').split('');
         console.log('cleanData: ', cleanData);
-        setNumbers(cleanData);
+        countNumbers(cleanData);
     };
 
-    console.log('numbers: ', numbers);
-
     const countNumbers = numbers => {
+        let response = [];
         let countZero = 0;
         let countOne = 0;
         let countTwo = 0;
@@ -35,9 +68,10 @@ const App = () => {
         let countSeven = 0;
         let countEight = 0;
         let countNine = 0;
+        console.log('countNumbers is firing');
 
         for (let i = 0; i < numbers.length; i++) {
-            // console.log('numbers[i]: ', numbers[i]);
+            console.log('numbers[i]: ', numbers[i]);
             switch (numbers[i]) {
                 case '1':
                     countOne++;
@@ -72,7 +106,7 @@ const App = () => {
                 default:
             }
         }
-        setResults([
+        response = [
             {
                 name: '0',
                 data: countZero
@@ -113,19 +147,31 @@ const App = () => {
                 name: '9',
                 data: countNine
             }
-        ]);
+        ];
+        console.log('response: ', response);
+        setResults(response);
     };
 
-    console.log('results: ', results);
+    const handleDataFetch = async e => {
+        e.preventDefault();
+
+        await fetchData();
+    };
+
     return (
         <div>
-            <h1>Histogram</h1>
-            <ResponsiveContainer width='100%' aspect={3}>
+            <h1 style={{ textAlign: 'center', padding: '10px' }}>Histogram</h1>
+            <div style={{ textAlign: 'center', padding: '1em' }}>
+                <button onClick={handleDataFetch}>GET DATA</button>
+            </div>
+            <ResponsiveContainer width='90%' aspect={3} style={{ margin: '0 auto' }}>
                 <BarChart width={800} height={300} data={results}>
-                    <CartesianGrid strokeDasharray='3 3' />
+                    <CartesianGrid strokeDasharray='4 3' />
                     <XAxis dataKey='name' />
                     <YAxis />
-                    <Bar dataKey='data' fill='lightblue'/>
+                    <Bar dataKey='data' fill='lightblue'>
+                        <LabelList dataKey='data' />
+                    </Bar>
                 </BarChart>
             </ResponsiveContainer>
         </div>
