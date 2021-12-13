@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './App.css';
 import {
     BarChart,
     Bar,
@@ -71,7 +72,7 @@ const App = () => {
         console.log('countNumbers is firing');
 
         for (let i = 0; i < numbers.length; i++) {
-            console.log('numbers[i]: ', numbers[i]);
+            // console.log('numbers[i]: ', numbers[i]);
             switch (numbers[i]) {
                 case '1':
                     countOne++;
@@ -160,9 +161,11 @@ const App = () => {
 
     return (
         <div>
-            <h1 style={{ textAlign: 'center', padding: '10px' }}>Histogram</h1>
+            <h1 style={{ textAlign: 'center', padding: '10px' }}>Random Number Distribution</h1>
             <div style={{ textAlign: 'center', padding: '1em' }}>
-                <button onClick={handleDataFetch}>GET DATA</button>
+                <button className='btn' onClick={handleDataFetch}>
+                    GET DATA
+                </button>
             </div>
             <ResponsiveContainer width='90%' aspect={3} style={{ margin: '0 auto' }}>
                 <BarChart width={800} height={300} data={results}>

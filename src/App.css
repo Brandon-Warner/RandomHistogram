@@ -1,0 +1,15 @@
+button.btn {
+    padding: 10px 1em;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    color: purple;
+    background-color: #efefef;
+    transition: color 200ms linear, background-color 200ms linear;
+}
+
+.btn:hover {
+    cursor: pointer;
+    color: #efefef;
+    background-color: purple;
+}
