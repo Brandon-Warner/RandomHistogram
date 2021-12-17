@@ -8,7 +8,9 @@ import {
     YAxis,
     CartesianGrid,
     ResponsiveContainer,
-    LabelList
+    LabelList,
+    Legend,
+    Tooltip
 } from 'recharts';
 
 const App = () => {
@@ -110,43 +112,43 @@ const App = () => {
         response = [
             {
                 name: '0',
-                data: countZero
+                count: countZero
             },
             {
                 name: '1',
-                data: countOne
+                count: countOne
             },
             {
                 name: '2',
-                data: countTwo
+                count: countTwo
             },
             {
                 name: '3',
-                data: countThree
+                count: countThree
             },
             {
                 name: '4',
-                data: countFour
+                count: countFour
             },
             {
                 name: '5',
-                data: countFive
+                count: countFive
             },
             {
                 name: '6',
-                data: countSix
+                count: countSix
             },
             {
                 name: '7',
-                data: countSeven
+                count: countSeven
             },
             {
                 name: '8',
-                data: countEight
+                count: countEight
             },
             {
                 name: '9',
-                data: countNine
+                count: countNine
             }
         ];
         console.log('response: ', response);
@@ -172,8 +174,10 @@ const App = () => {
                     <CartesianGrid strokeDasharray='4 3' />
                     <XAxis dataKey='name' />
                     <YAxis />
-                    <Bar dataKey='data' fill='lightblue'>
-                        <LabelList dataKey='data' />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey='count' fill='purple'>
+                        <LabelList dataKey='count' position='top' />
                     </Bar>
                 </BarChart>
             </ResponsiveContainer>
