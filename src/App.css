@@ -4,7 +4,7 @@ button.btn {
     border: 1px solid purple;
     border-radius: 10px;
     color: purple;
-    background-color: white;
+    background-color: #b5b5b5;
     transition: color 200ms linear, background-color 200ms linear;
 }
 
@@ -12,4 +12,21 @@ button.btn {
     cursor: pointer;
     color: #efefef;
     background-color: purple;
+}
+
+div#analysis {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+div#analysis-data {
+    display: flex;
+    justify-content: center;
+    align-content: space-around;
+}
+
+#analysis-data-point {
+    padding: 0 20px;
 }

@@ -161,6 +161,41 @@ const App = () => {
         await fetchData();
     };
 
+    const calculateMax = results => {
+        let max = results[0].count;
+        const numbers = results.map(r => r.count);
+        for (let i = 0; i < numbers.length; i++) {
+            if (numbers[i] > max) {
+                max = numbers[i];
+            }
+        }
+        return max;
+    };
+
+    const calculateMin = results => {
+        let min = results[0].count;
+        const numbers = results.map(r => r.count);
+        for (let i = 0; i < numbers.length; i++) {
+            if (numbers[i] < min) {
+                min = numbers[i];
+            }
+        }
+        return min;
+    };
+
+    const calculateAvg = results => {
+        const numbers = results.map(r => Number(r.count));
+        const total = numbers.reduce((current, sum) => {
+            return (sum += current);
+        }, 0);
+
+        console.log('total: ', total);
+
+        const average = total / 10;
+
+        return average ? average : '';
+    };
+
     return (
         <div>
             <h1 style={{ textAlign: 'center', padding: '10px' }}>Random Number Distribution</h1>
@@ -169,8 +204,8 @@ const App = () => {
                     GET DATA
                 </button>
             </div>
-            <ResponsiveContainer width='90%' aspect={3} style={{ margin: '0 auto' }}>
-                <BarChart width={800} height={300} data={results}>
+            <ResponsiveContainer width='95%' aspect={3}>
+                <BarChart width={800} height={350} data={results}>
                     <CartesianGrid strokeDasharray='4 3' />
                     <XAxis dataKey='name' />
                     <YAxis />
@@ -181,6 +216,12 @@ const App = () => {
                     </Bar>
                 </BarChart>
             </ResponsiveContainer>
+
+            <div id='analysis-data'>
+                <h3 id='analysis-data-point'>Max: {calculateMax(results)}</h3>
+                <h3 id='analysis-data-point'>Min: {calculateMin(results)}</h3>
+                <h3 id='analysis-data-point'>Average: {calculateAvg(results)}</h3>
+            </div>
         </div>
     );
 };
