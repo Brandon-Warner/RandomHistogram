@@ -14,17 +14,17 @@ button.btn {
     background-color: purple;
 }
 
-div#analysis {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid black;
-    text-align: center;
+#graph {
+    box-shadow: 5px 5px 10px;
+    margin: 0 auto;
 }
 
 div#analysis-data {
     display: flex;
+    margin: 1em auto;
     justify-content: center;
-    align-content: space-around;
+    box-shadow: 5px 5px 10px;
+    width: 25%;
 }
 
 #analysis-data-point {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import { Stack, LinearProgress } from '@mui/material';
 import {
     BarChart,
     Bar,
@@ -46,9 +47,11 @@ const App = () => {
             name: '9'
         }
     ]);
+    const [loading, setLoading] = useState(false);
 
     const fetchData = async () => {
         console.log('fetch is firing');
+        setLoading(true);
         const data = await axios.get(
             'https://www.random.org/integers/?num=200&min=1&max=10&col=1&base=10&format=plain&rnd=new'
         );
@@ -57,6 +60,7 @@ const App = () => {
         const cleanData = stringData.replace(/(\r\n|\n|\r)/gm, '').split('');
         console.log('cleanData: ', cleanData);
         countNumbers(cleanData);
+        setLoading(false);
     };
 
     const countNumbers = numbers => {
@@ -204,17 +208,23 @@ const App = () => {
                     GET DATA
                 </button>
             </div>
-            <ResponsiveContainer width='95%' aspect={3}>
-                <BarChart width={800} height={350} data={results}>
-                    <CartesianGrid strokeDasharray='4 3' />
-                    <XAxis dataKey='name' />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey='count' fill='purple'>
-                        <LabelList dataKey='count' position='top' />
-                    </Bar>
-                </BarChart>
+            <ResponsiveContainer id='graph' width='95%' aspect={3}>
+                {loading ? (
+                    <Stack sx={{ width: '100%' }}>
+                        <LinearProgress color='secondary' />
+                    </Stack>
+                ) : (
+                    <BarChart width='100%' height='100%' data={results}>
+                        <CartesianGrid strokeDasharray='4 3' />
+                        <XAxis dataKey='name' />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey='count' fill='purple'>
+                            <LabelList dataKey='count' position='top' />
+                        </Bar>
+                    </BarChart>
+                )}
             </ResponsiveContainer>
 
             <div id='analysis-data'>
