@@ -15,6 +15,7 @@ button.btn {
 }
 
 #graph {
+    border-radius: 10px;
     box-shadow: 5px 5px 10px;
     margin: 0 auto;
 }
@@ -23,6 +24,7 @@ div#analysis-data {
     display: flex;
     margin: 1em auto;
     justify-content: center;
+    border-radius: 10px;
     box-shadow: 5px 5px 10px;
     width: 25%;
 }
